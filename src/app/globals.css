@@ -1,26 +1,369 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─── Design Token CSS Custom Properties ──────────────────────────────────────
+   All values are expressed as RGB triplets (no # prefix, no rgb() wrapper)
+   so Tailwind's opacity modifier syntax works:
+     bg-brand-300/50  →  rgb(var(--brand-300) / 0.50)
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+   Dark-mode overrides are handled by [.dark :root] or [.dark] selector.
+   ─────────────────────────────────────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* ── Brand — Pastel Purple ─────────────────────────────────────────────── */
+    --brand-50: 250 245 255; /* #faf5ff */
+    --brand-100: 243 232 255; /* #f3e8ff */
+    --brand-200: 233 213 255; /* #e9d5ff */
+    --brand-300: 216 180 254; /* #d8b4fe  ← focus ring */
+    --brand-400: 192 132 252; /* #c084fc  ← text accent */
+    --brand-500: 168 85 247; /* #a855f7  ← strong fill */
+    --brand-600: 147 51 234; /* #9333ea */
+    --brand-700: 126 34 206; /* #7e22ce  ← dark text */
+    --brand-800: 107 33 168; /* #6b21a8 */
+    --brand-900: 88 28 135; /* #581c87 */
+    --brand-950: 59 7 100; /* #3b0764 */
+
+    /* ── Accent — Pastel Blue ──────────────────────────────────────────────── */
+    --accent-50: 239 246 255; /* #eff6ff */
+    --accent-100: 219 234 254; /* #dbeafe */
+    --accent-200: 191 219 254; /* #bfdbfe */
+    --accent-300: 147 197 253; /* #93c5fd */
+    --accent-400: 96 165 250; /* #60a5fa */
+    --accent-500: 59 130 246; /* #3b82f6 */
+    --accent-600: 37 99 235; /* #2563eb */
+    --accent-700: 29 78 216; /* #1d4ed8 */
+
+    /* ── Success — Pastel Emerald ──────────────────────────────────────────── */
+    --success-50: 236 253 245; /* #ecfdf5 */
+    --success-100: 209 250 229; /* #d1fae5 */
+    --success-200: 167 243 208; /* #a7f3d0 */
+    --success-300: 110 231 183; /* #6ee7b7 */
+    --success-400: 52 211 153; /* #34d399 */
+    --success-500: 16 185 129; /* #10b981 */
+    --success-600: 5 150 105; /* #059669 */
+    --success-700: 4 120 87; /* #047857 */
+
+    /* ── Warning — Pastel Amber ────────────────────────────────────────────── */
+    --warning-50: 255 251 235; /* #fffbeb */
+    --warning-100: 254 243 199; /* #fef3c7 */
+    --warning-200: 253 230 138; /* #fde68a */
+    --warning-300: 252 211 77; /* #fcd34d */
+    --warning-400: 251 191 36; /* #fbbf24 */
+    --warning-500: 245 158 11; /* #f59e0b */
+    --warning-600: 217 119 6; /* #d97706 */
+    --warning-700: 180 83 9; /* #b45309 */
+
+    /* ── Error — Pastel Red (soft) ─────────────────────────────────────────── */
+    --error-50: 254 242 242; /* #fef2f2 */
+    --error-100: 254 226 226; /* #fee2e2 */
+    --error-200: 254 202 202; /* #fecaca */
+    --error-300: 252 165 165; /* #fca5a5 */
+    --error-400: 248 113 113; /* #f87171 */
+    --error-500: 239 68 68; /* #ef4444 */
+    --error-600: 220 38 38; /* #dc2626 */
+    --error-700: 185 28 28; /* #b91c1c */
+
+    /* ── Neutral — Slate (glass-friendly) ─────────────────────────────────── */
+    --neutral-50: 248 250 252; /* #f8fafc  slate-50 */
+    --neutral-100: 241 245 249; /* #f1f5f9  slate-100 */
+    --neutral-200: 226 232 240; /* #e2e8f0  slate-200 */
+    --neutral-300: 203 213 225; /* #cbd5e1  slate-300 */
+    --neutral-400: 148 163 184; /* #94a3b8  slate-400 */
+    --neutral-500: 100 116 139; /* #64748b  slate-500 */
+    --neutral-600: 71 85 105; /* #475569  slate-600 */
+    --neutral-700: 51 65 85; /* #334155  slate-700 */
+    --neutral-800: 30 41 59; /* #1e293b  slate-800 */
+    --neutral-900: 15 23 42; /* #0f172a  slate-900 */
+    --neutral-950: 2 6 23; /* #020617  slate-950 */
+
+    /* ── Motion ────────────────────────────────────────────────────────────── */
+    --duration-fast: 150ms;
+    --duration-normal: 200ms;
+    --duration-slow: 300ms;
+    --duration-slower: 500ms;
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  /* ── Global resets ─────────────────────────────────────────────────────────── */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Remove default focus outline — components apply their own via focus-visible */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Glass Component Utilities ───────────────────────────────────────────────
+   Reusable CSS component classes that mirror the TypeScript token layer.
+   These are the Tailwind @layer components equivalents.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+  /* Surface depth hierarchy */
+  .glass-float {
+    @apply bg-white/20 dark:bg-white/[0.03] backdrop-blur-2xl border border-white/10 dark:border-white/8;
+  }
+  .glass-surface {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-glass-md;
+  }
+  .glass-raised {
+    @apply bg-white/70 dark:bg-white/[0.07] backdrop-blur-xl border border-white/25 dark:border-white/[0.12] shadow-glass-lg;
+  }
+  .glass-elevated {
+    @apply bg-white/80 dark:bg-white/[0.08] backdrop-blur-xl border border-white/30 dark:border-white/15 shadow-glass-xl;
+  }
+  .glass-overlay {
+    @apply bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-white/25 dark:border-white/10 shadow-glass-xl;
+  }
+
+  /* Interactive states */
+  .glass-hover {
+    @apply hover:bg-white/75 dark:hover:bg-white/[0.08] transition-all duration-150 ease-out;
+  }
+  .glass-active-ring {
+    @apply ring-2 ring-brand-300/50 dark:ring-brand-400/40;
+  }
+
+  /* Input base — used by the entire Input System */
+  .glass-input-base {
+    @apply w-full rounded-2xl px-4 py-3
+      bg-white/60 dark:bg-white/5
+      backdrop-blur-lg
+      border border-white/20 dark:border-white/10
+      shadow-glass-sm
+      text-gray-800 dark:text-gray-200
+      placeholder:text-gray-400 dark:placeholder:text-gray-600
+      caret-brand-400
+      outline-none
+      transition-all duration-200 ease-out
+      hover:bg-white/80 dark:hover:bg-white/10
+      focus:ring-2 focus:ring-brand-300/50 focus:border-brand-300/50
+      focus:shadow-glass-md
+      focus:scale-[1.01]
+      disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .glass-input-error {
+    @apply border-error-300/60 ring-2 ring-error-300/40
+      focus:ring-error-300/50 focus:border-error-300/60;
+  }
+
+  /* Card base */
+  .glass-card {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-glass-md rounded-3xl;
+  }
+  .glass-card-elevated {
+    @apply bg-white/80 dark:bg-white/[0.08] backdrop-blur-xl border border-white/30 dark:border-white/15 shadow-glass-xl rounded-3xl;
+  }
+
+  /* Tooltip / Popover / Dropdown surface */
+  .glass-popup {
+    @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-white/30 dark:border-white/10 shadow-glass-xl rounded-2xl;
+  }
+
+  /* Toast surface */
+  .glass-toast {
+    @apply bg-white/90 dark:bg-neutral-800/90 backdrop-blur-xl border border-white/30 dark:border-white/10 shadow-glass-xl rounded-2xl;
+  }
+}
+
+/* ─── Utility Extras ──────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Scrollbar */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300/60 dark:bg-white/10 rounded-full;
+  }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Glass-specific opacity helpers */
+  .bg-glass-white-subtle {
+    background-color: rgb(255 255 255 / 0.04);
+  }
+  .bg-glass-white-muted {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+  .bg-glass-white-base {
+    background-color: rgb(255 255 255 / 0.6);
+  }
+  .bg-glass-white-raised {
+    background-color: rgb(255 255 255 / 0.75);
+  }
+  .bg-glass-white-solid {
+    background-color: rgb(255 255 255 / 0.9);
+  }
+
+  /* Inset highlight line (top-border glass effect) */
+  .inset-highlight {
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.6);
+  }
+  .inset-highlight-sm {
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.4);
+  }
+}
+
+/* ─── Keyframe Animations ─────────────────────────────────────────────────────
+   Global @keyframes not covered by Tailwind's animation utilities.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 0) 0%,
+    rgb(255 255 255 / 0.08) 50%,
+    rgb(0 0 0 / 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Dark-mode shimmer */
+.dark .animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0) 0%,
+    rgb(255 255 255 / 0.05) 50%,
+    rgb(255 255 255 / 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ─── Motion System CSS Variables ────────────────────────────────────────────
+   Mirrors src/styles/motion.ts for use in vanilla CSS contexts.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    --motion-instant: 100ms;
+    --motion-fast: 150ms;
+    --motion-normal: 200ms;
+    --motion-moderate: 250ms;
+    --motion-slow: 300ms;
+    --motion-slower: 500ms;
+    --motion-ease-default: ease-out;
+    --motion-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --motion-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --motion-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+    --motion-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  }
+}
+
+/* ─── Prefers-Reduced-Motion ──────────────────────────────────────────────────
+   Collapses all transitions/animations to near-zero.
+   Keeps opacity changes (0.01ms) so transitionend events still fire for
+   accessibility hooks (aria-live, focus management, etc.).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Infinite animations must be fully paused */
+  .animate-spin,
+  .animate-spin-slow,
+  .animate-glow-pulse,
+  .animate-bounce-subtle,
+  .animate-ping-sm {
+    animation: none !important;
+  }
+
+  /* Skeleton: collapse shimmer to a static muted fill */
+  .animate-shimmer {
+    animation: none !important;
+    background: rgb(var(--neutral-200) / 0.6) !important;
+  }
+  .dark .animate-shimmer {
+    background: rgb(255 255 255 / 0.06) !important;
+  }
+}
+
+/* ─── Motion Utility Classes ──────────────────────────────────────────────────
+   Semantic helpers that complement src/styles/motion.ts.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Hover lifts */
+  .motion-hover-lift-sm {
+    @apply transition-all duration-150 ease-out
+           hover:-translate-y-0.5 hover:shadow-glass-lg;
+  }
+  .motion-hover-lift {
+    @apply transition-all duration-200 ease-out
+           hover:-translate-y-1 hover:shadow-glass-xl;
+  }
+
+  /* Press scale */
+  .motion-press {
+    @apply active:scale-[0.98] active:translate-y-0;
+  }
+  .motion-press-sm {
+    @apply active:scale-[0.99];
+  }
+
+  /* Accessible focus ring */
+  .motion-focus-ring {
+    @apply focus-visible:outline-none
+           focus-visible:ring-2
+           focus-visible:ring-brand-300/50
+           focus-visible:ring-offset-2;
+  }
+
+  /* Safe opacity-only transition (reduced-motion friendly) */
+  .motion-safe {
+    transition-property: opacity;
+    transition-duration: var(--motion-fast);
+    transition-timing-function: var(--motion-ease-default);
+  }
 }
