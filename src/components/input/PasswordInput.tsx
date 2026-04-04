@@ -5,21 +5,26 @@ import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { InputSpinner } from "./core/InputSpinner";
 
-export interface PasswordInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  helperText?: string;
+  description?: string;
   errorMessage?: string;
   isLoading?: boolean;
+  showToggle?: boolean;
+  rightIcon?: React.ReactNode;
+  helperText?: string;
 }
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   (
     {
       label,
-      helperText,
+      description,
       errorMessage,
       isLoading,
+      showToggle,
+      rightIcon,
+      helperText,
       className,
       id,
       disabled,

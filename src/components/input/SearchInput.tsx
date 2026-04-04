@@ -5,15 +5,14 @@ import { cn } from "@/lib/utils";
 import { Search, X } from "lucide-react";
 import { InputSpinner } from "./core/InputSpinner";
 
-export interface SearchInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange"> {
+export interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  helperText?: string;
+  description?: string;
   errorMessage?: string;
   isLoading?: boolean;
-  onChange?: (value: string) => void;
   onClear?: () => void;
   debounceMs?: number;
+  helperText?: string;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
@@ -57,15 +56,28 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       setInternalValue(raw);
       if (debounceMs > 0) {
         if (debounceRef.current) clearTimeout(debounceRef.current);
-        debounceRef.current = setTimeout(() => onChange?.(raw), debounceMs);
+        debounceRef.current = setTimeout(() => {
+          // Create a synthetic event for onChange
+          const syntheticEvent = {
+            target: { value: raw }
+          } as React.ChangeEvent<HTMLInputElement>;
+          onChange?.(syntheticEvent);
+        }, debounceMs);
       } else {
-        onChange?.(raw);
+        // Create a synthetic event for onChange
+        const syntheticEvent = {
+          target: { value: raw }
+        } as React.ChangeEvent<HTMLInputElement>;
+        onChange?.(syntheticEvent);
       }
     };
 
     const handleClear = () => {
       setInternalValue("");
-      onChange?.("");
+      const syntheticEvent = {
+        target: { value: "" }
+      } as React.ChangeEvent<HTMLInputElement>;
+      onChange?.(syntheticEvent);
       onClear?.();
     };
 

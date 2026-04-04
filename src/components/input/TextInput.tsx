@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 import { InputIcon } from "./core/InputIcon";
 import { InputSpinner } from "./core/InputSpinner";
 
-export interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  helperText?: string;
+  description?: string;
   errorMessage?: string;
-  prefixIcon?: React.ReactNode;
-  suffixIcon?: React.ReactNode;
   isLoading?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  onClear?: () => void;
   floatingLabel?: boolean;
 }
 
@@ -20,6 +20,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       label,
+      description,
       helperText,
       errorMessage,
       prefixIcon,

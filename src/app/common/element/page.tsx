@@ -16,8 +16,6 @@ import {
   List,
   ListItem,
   ListGroup,
-  Avatar,
-  AvatarGroup,
   Skeleton,
   Spinner,
   EmptyState,
@@ -288,28 +286,54 @@ export default function ElementDemo() {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Avatars</h2>
         <div className="space-y-6">
           <div className="flex items-center gap-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Sizes</h3>
-            <div className="flex items-center gap-3">
-              <Avatar fallback="XS" size="xs" />
-              <Avatar fallback="SM" size="sm" />
-              <Avatar fallback="MD" size="md" />
-              <Avatar fallback="LG" size="lg" />
-              <Avatar fallback="XL" size="xl" />
-              <Avatar fallback="2XL" size="2xl" />
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Avatar Sizes</h3>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs">SM</div>
+              <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-sm">MD</div>
+              <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">LG</div>
+              <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-lg">XL</div>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Avatar Group</h3>
-            <AvatarGroup avatars={avatarGroup} max={4} size="md" />
+            <div className="flex -space-x-2">
+              {avatarGroup.slice(0, 4).map((avatar, index) => (
+                <div
+                  key={index}
+                  className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 ring-2 ring-white dark:ring-gray-800 flex items-center justify-center text-sm font-medium"
+                >
+                  {avatar.fallback}
+                </div>
+              ))}
+              {avatarGroup.length > 4 && (
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 ring-2 ring-white dark:ring-gray-800 text-xs font-medium text-gray-600 dark:text-gray-300">
+                  +{avatarGroup.length - 4}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">With Status</h3>
-            <Avatar fallback="JD" size="lg" ring status="online" />
-            <Avatar fallback="AS" size="lg" ring status="away" />
-            <Avatar fallback="MK" size="lg" ring status="busy" />
-            <Avatar fallback="TL" size="lg" ring status="offline" />
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">JD</div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">AS</div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-yellow-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">MK</div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">TL</div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-gray-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
