@@ -2155,6 +2155,178 @@ function DocumentSystemShowcase() {
           </div>
         </div>
       </section>
+
+      {/* Signature Frame Section */}
+      <section>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Signature Frame</h3>
+        <div className="bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/25 dark:border-white/10 rounded-3xl p-8">
+          <div className="space-y-6">
+            {/* Signature Frame Types */}
+            <div>
+              <h4 className="font-medium text-gray-900 dark:text-white mb-4">Signature Frame Types</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Basic Signature Frame */}
+                <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-6">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="text-3xl text-gray-400 dark:text-gray-500">✍️</div>
+                    </div>
+                    <h5 className="font-medium text-gray-900 dark:text-white mb-2">Basic Signature</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      Simple signature area for digital signatures
+                    </p>
+                    <div className="h-20 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                      <span className="text-gray-400 dark:text-gray-500 text-sm">Sign here</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Formal Signature Frame */}
+                <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-gray-300 dark:border-gray-700 p-6">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="text-3xl text-gray-400 dark:text-gray-500">📝</div>
+                    </div>
+                    <h5 className="font-medium text-gray-900 dark:text-white mb-2">Formal Signature</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      Professional signature frame with details
+                    </p>
+                    <div className="space-y-3">
+                      <div className="h-16 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                        <span className="text-gray-400 dark:text-gray-500 text-sm">Signature</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="text-left">
+                          <span className="text-gray-500 dark:text-gray-400">Date:</span>
+                          <div className="h-6 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 mt-1"></div>
+                        </div>
+                        <div className="text-left">
+                          <span className="text-gray-500 dark:text-gray-400">Name:</span>
+                          <div className="h-6 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 mt-1"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certified Signature Frame */}
+                <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-blue-300 dark:border-blue-700 p-6 relative">
+                  <div className="absolute top-2 right-2">
+                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                      <div className="text-blue-600 dark:text-blue-400 text-xs">🔒</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="text-3xl text-blue-500">🏛️</div>
+                    </div>
+                    <h5 className="font-medium text-gray-900 dark:text-white mb-2">Certified Signature</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      Legally binding signature with certification
+                    </p>
+                    <div className="space-y-3">
+                      <div className="h-20 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800 flex items-center justify-center">
+                        <span className="text-blue-400 dark:text-blue-300 text-sm">Certified Signature</span>
+                      </div>
+                      <div className="text-xs text-blue-600 dark:text-blue-400">
+                        <div className="flex justify-between">
+                          <span>Digital ID: #123456</span>
+                          <span>✓ Verified</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Signature Frame Features */}
+            <div>
+              <h4 className="font-medium text-gray-900 dark:text-white mb-4">Signature Frame Features</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">🖊️ Drawing Tools</div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Pen, brush, eraser with pressure sensitivity</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">📱 Touch Support</div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Native touch and stylus input support</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">💾 Auto-save</div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Automatic signature saving and backup</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">🔐 Security</div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Encrypted storage and tamper protection</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Signature Demo */}
+            <div>
+              <h4 className="font-medium text-gray-900 dark:text-white mb-4">Interactive Signature Demo</h4>
+              <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-gray-300 dark:border-gray-700 p-8">
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h5 className="font-medium text-gray-900 dark:text-white">Document Agreement</h5>
+                    <div className="flex gap-2">
+                      <button className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700">
+                        Clear
+                      </button>
+                      <button className="px-3 py-1 text-xs bg-brand-500 text-white rounded hover:bg-brand-600">
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                        By signing below, I agree to the terms and conditions outlined in this document.
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        This electronic signature is legally binding under the Electronic Signatures Act.
+                      </p>
+                    </div>
+                    
+                    <div className="border-t-2 border-dashed border-gray-300 dark:border-gray-600 pt-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Signature
+                          </label>
+                          <div className="h-24 bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center cursor-pointer hover:border-brand-500 transition-colors">
+                            <div className="text-center">
+                              <div className="text-2xl text-gray-400 dark:text-gray-500 mb-2">✍️</div>
+                              <span className="text-sm text-gray-500 dark:text-gray-400">Click to sign</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Full Name
+                            </label>
+                            <div className="h-8 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded"></div>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Date
+                            </label>
+                            <div className="h-8 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

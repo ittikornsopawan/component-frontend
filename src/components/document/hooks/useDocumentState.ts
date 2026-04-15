@@ -14,17 +14,43 @@ const DEFAULT_PAGES: DocumentPage[] = [
   { index: 2, naturalWidth: 794, naturalHeight: 1123, content: "blank"    },
 ];
 
+// Pre-defined signature fields for the contract
+const DEFAULT_SIGNATURE_FIELDS: DocumentField[] = [
+  {
+    id: "sig-provider-1",
+    type: "signature",
+    pageIndex: 1,
+    x: 15, // Left column (Service Provider)
+    y: 82, // Bottom of page where signatures are
+    width: 35,
+    height: 12,
+    label: "Service Provider Signature",
+    required: true,
+  },
+  {
+    id: "sig-client-1",
+    type: "signature", 
+    pageIndex: 1,
+    x: 55, // Right column (Client)
+    y: 82, // Bottom of page where signatures are
+    width: 35,
+    height: 12,
+    label: "Client Signature",
+    required: true,
+  },
+];
+
 const INITIAL_STATE: DocumentState = {
   pages:          DEFAULT_PAGES,
-  fields:         [],
+  fields:         DEFAULT_SIGNATURE_FIELDS, // Start with signature fields
   annotations:    [],
-  currentPage:    0,
+  currentPage:    1, // Start on page 2 where signatures are
   zoom:           1,
   activeTool:     "select",
   selectedFieldId: null,
   activeColor:    "#7C3AED",
   activePenWidth: 2,
-  history:        [{ fields: [], annotations: [] }],
+  history:        [{ fields: DEFAULT_SIGNATURE_FIELDS, annotations: [] }], // Include fields in history
   historyIndex:   0,
 };
 
